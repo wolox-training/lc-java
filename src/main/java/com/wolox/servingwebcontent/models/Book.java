@@ -40,6 +40,9 @@ public class Book {
     @Column(nullable = false)
     private String isbn;
 
+    public Book() {
+    }
+
     public Book(String newGenre, String newAuthor, String newImage, String newTitle,
         String newSubtitle, String newPublisher, Integer newYear, Integer newPages,
         String newIsbn) {
