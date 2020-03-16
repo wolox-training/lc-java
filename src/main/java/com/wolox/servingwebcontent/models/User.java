@@ -1,12 +1,18 @@
 package com.wolox.servingwebcontent.models;
 
+import com.wolox.servingwebcontent.exceptions.BookAlreadyOwnedException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import org.apache.tomcat.jni.Local;
 
 @Entity
@@ -25,7 +31,10 @@ public class User {
     @Column(nullable = false)
     private LocalDate birthdate;
 
-    @Column(nullable = false)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_user",
+        joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<Book> books;
 
     public User() {
@@ -64,7 +73,19 @@ public class User {
     }
 
     public List<Book> getBooks() {
-        return books;
+        return (List<Book>) Collections.unmodifiableList(books);
+    }
+    public void addBookToCollection(Book newBook) {
+        if(!this.books.contains(newBook)){
+            this.books.add(newBook);
+        } else {
+            new BookAlreadyOwnedException("Book already owned");
+        }
+    }
+    public void deleteBookFromCollection(Book bookToDelete) {
+        if (this.books.contains(bookToDelete)){
+            this.books.remove(bookToDelete);
+        }
     }
 
     public User(long id, String name, String username, LocalDate birthdate,
