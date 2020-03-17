@@ -96,4 +96,8 @@ public class User {
         this.birthdate = birthdate;
         this.books = books;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }
