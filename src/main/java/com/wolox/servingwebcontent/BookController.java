@@ -6,6 +6,7 @@ import com.wolox.servingwebcontent.packages.BookRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/books")
+@Controller
 public class BookController {
 
     @Autowired
@@ -44,7 +46,7 @@ public class BookController {
     @GetMapping("/{id}")
     public Book findOne(@PathVariable Long id) {
         return bookRepository.findById(id)
-            .orElseThrow(() -> new BookNotFoundException("Book not found"));
+            .orElseThrow(BookNotFoundException::new);
     }
 
     @PostMapping
@@ -56,17 +58,17 @@ public class BookController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         bookRepository.findById(id)
-            .orElseThrow(() -> new BookNotFoundException("Book not found"));
+            .orElseThrow(BookNotFoundException::new);
         bookRepository.deleteById(id);
     }
 
     @PutMapping("/{id}")
     public Book updateBook(@RequestBody Book book, @PathVariable Long id) {
         if (book.getId() != id) {
-            throw new BookIdMismatchException("Invalid id for this operation");
+            throw new BookIdMismatchException();
         }
         bookRepository.findById(id)
-            .orElseThrow(() -> new BookNotFoundException("Book not found"));
+            .orElseThrow(BookNotFoundException::new);
         return bookRepository.save(book);
     }
 }
