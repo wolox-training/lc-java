@@ -1,5 +1,6 @@
 package com.wolox.servingwebcontent.models;
 
+import com.google.common.base.Preconditions;
 import com.wolox.servingwebcontent.exceptions.BookAlreadyOwnedException;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -42,7 +43,7 @@ public class Users {
 
     // Setter
     public void setName(String newName) {
-        this.name = newName;
+        this.name = Preconditions.checkNotNull(newName);
     }
 
     public String getName() {
@@ -51,7 +52,7 @@ public class Users {
 
     // Setter
     public void setUsername(String newUsername) {
-        this.username = newUsername;
+        this.username = Preconditions.checkNotNull(newUsername);
     }
 
     public String getUsername() {
@@ -60,7 +61,7 @@ public class Users {
 
     // Setter
     public void setBirthdate(LocalDate newBirthdate) {
-        this.birthdate = newBirthdate;
+        this.birthdate = Preconditions.checkNotNull(newBirthdate);
     }
 
     public LocalDate getBirthdate() {
