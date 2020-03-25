@@ -1,9 +1,0 @@
-import com.wolox.servingwebcontent.models.Book;
-import org.springframework.data.jpa.repository.Query;
-
-public interface BookDepository extends JpaRepository<Book, Long> {
-
-    @Query("SELECT b FROM Book b WHERE LOWER(b.author) = LOWER(:author)")
-    Book findFirstByAuthor(String author);
-
-}

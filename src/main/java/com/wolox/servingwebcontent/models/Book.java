@@ -43,7 +43,6 @@ public class Book {
     public Book(String newGenre, String newAuthor, String newImage, String newTitle,
         String newSubtitle, String newPublisher, Integer newYear, Integer newPages,
         String newIsbn) {
-        this.id = id;
         this.genre = newGenre;
         this.author = newAuthor;
         this.image = newImage;
@@ -135,4 +134,6 @@ public class Book {
     public String getIsbn() {
         return isbn;
     }
+
+    public long getId() { return id; }
 }
