@@ -1,4 +1,4 @@
-package com.wolox.servingwebcontent;
+package com.wolox.servingwebcontent.controllers;
 import com.wolox.servingwebcontent.exceptions.BookIdMismatchException;
 import com.wolox.servingwebcontent.exceptions.BookNotFoundException;
 import com.wolox.servingwebcontent.models.Book;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/books")
-@Controller
 public class BookController {
 
     @Autowired
