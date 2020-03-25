@@ -1,8 +1,7 @@
 package com.wolox.servingwebcontent.exceptions;
 
-public class BookIdMismatchException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public BookIdMismatchException(String message) {
-        super(message);
-    }
-}
+@ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "id mismatch exception")
+public class BookIdMismatchException extends RuntimeException {}
