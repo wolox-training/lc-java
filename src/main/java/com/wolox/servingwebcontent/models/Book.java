@@ -1,5 +1,7 @@
 package com.wolox.servingwebcontent.models;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
+@ApiModel(description = "Books from the OpenLibraryAPI")
 public class Book {
 
     @Id
@@ -16,6 +19,7 @@ public class Book {
     private long id;
 
     @Column
+    @ApiModelProperty(notes = "the book genre: could be horror, romance, comedy, etc")
     private String genre;
 
     @Column(nullable = false)
