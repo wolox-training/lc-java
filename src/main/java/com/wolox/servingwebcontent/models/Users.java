@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 import org.apache.tomcat.jni.Local;
 
 @Entity
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +37,7 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<Book> books;
 
-    public User() {
+    public Users() {
     }
 
     // Setter
@@ -79,7 +79,7 @@ public class User {
         if(!this.books.contains(newBook)){
             this.books.add(newBook);
         } else {
-            new BookAlreadyOwnedException("Book already owned");
+            new BookAlreadyOwnedException();
         }
     }
     public void deleteBookFromCollection(Book bookToDelete) {
@@ -88,7 +88,7 @@ public class User {
         }
     }
 
-    public User(long id, String name, String username, LocalDate birthdate,
+    public Users(long id, String name, String username, LocalDate birthdate,
         List<Book> books) {
         this.id = id;
         this.name = name;
