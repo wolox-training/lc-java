@@ -65,6 +65,9 @@ public class Book {
         this.users = users;
     }
 
+    public Book() {
+    }
+
     // Setter
     public void setGenre(String newGenre) {
         this.genre = Preconditions.checkNotNull(newGenre);
