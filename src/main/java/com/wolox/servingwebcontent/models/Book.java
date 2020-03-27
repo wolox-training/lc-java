@@ -1,5 +1,6 @@
 package com.wolox.servingwebcontent.models;
 
+import com.google.common.base.Preconditions;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
@@ -47,11 +48,11 @@ public class Book {
     private String isbn;
 
     @ManyToMany(mappedBy = "books")
-    private List<Users> users;
+    private List<User> users;
 
     public Book(String newGenre, String newAuthor, String newImage, String newTitle,
         String newSubtitle, String newPublisher, Integer newYear, Integer newPages,
-        String newIsbn, List<Users> users) {
+        String newIsbn, List<User> users) {
         this.genre = newGenre;
         this.author = newAuthor;
         this.image = newImage;
@@ -64,9 +65,12 @@ public class Book {
         this.users = users;
     }
 
+    public Book() {
+    }
+
     // Setter
     public void setGenre(String newGenre) {
-        this.genre = newGenre;
+        this.genre = Preconditions.checkNotNull(newGenre);
     }
 
     public String getGenre() {
@@ -75,7 +79,7 @@ public class Book {
 
     // Setter
     public void setAuthor(String newAuthor) {
-        this.author = newAuthor;
+        this.author = Preconditions.checkNotNull(newAuthor);
     }
 
     public String getAuthor() {
@@ -84,7 +88,7 @@ public class Book {
 
     // Setter
     public void setImage(String newImage) {
-        this.image = newImage;
+        this.image = Preconditions.checkNotNull(newImage);
     }
 
     public String getImage() {
@@ -93,7 +97,7 @@ public class Book {
 
     // Setter
     public void setTitle(String newTitle) {
-        this.title = newTitle;
+        this.title = Preconditions.checkNotNull(newTitle);
     }
 
     public String getTitle() {
@@ -102,7 +106,7 @@ public class Book {
 
     // Setter
     public void setSubtitle(String newSubtitle) {
-        this.subtitle = newSubtitle;
+        this.subtitle = Preconditions.checkNotNull(newSubtitle);
     }
 
     public String getSubtitle() {
@@ -111,7 +115,7 @@ public class Book {
 
     // Setter
     public void setPublisher(String newPublisher) {
-        this.publisher = newPublisher;
+        this.publisher = Preconditions.checkNotNull(newPublisher);
     }
 
     public String getPublisher() {
@@ -120,7 +124,7 @@ public class Book {
 
     // Setter
     public void setYear(Integer newYear) {
-        this.year = newYear;
+        this.year = Preconditions.checkNotNull(newYear);
     }
 
     public Integer getYear() {
@@ -129,7 +133,7 @@ public class Book {
 
     // Setter
     public void setPages(Integer newPages) {
-        this.pages = newPages;
+        this.pages = Preconditions.checkNotNull(newPages);
     }
 
     public Integer getPages() {
@@ -138,7 +142,7 @@ public class Book {
 
     // Setter
     public void setIsbn(String newIsbn) {
-        this.isbn = newIsbn;
+        this.isbn = Preconditions.checkNotNull(newIsbn);
     }
 
     public String getIsbn() {
@@ -146,4 +150,6 @@ public class Book {
     }
 
     public long getId() { return id; }
+
+
 }

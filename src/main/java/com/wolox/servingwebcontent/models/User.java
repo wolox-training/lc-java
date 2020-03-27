@@ -1,5 +1,7 @@
 package com.wolox.servingwebcontent.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.google.common.base.Preconditions;
 import com.wolox.servingwebcontent.exceptions.BookAlreadyOwnedException;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -13,10 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import org.apache.tomcat.jni.Local;
 
+@Table(name = "users")
 @Entity
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,12 +41,12 @@ public class Users {
         inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<Book> books;
 
-    public Users() {
+    public User() {
     }
 
     // Setter
     public void setName(String newName) {
-        this.name = newName;
+        this.name = Preconditions.checkNotNull(newName);
     }
 
     public String getName() {
@@ -51,7 +55,7 @@ public class Users {
 
     // Setter
     public void setUsername(String newUsername) {
-        this.username = newUsername;
+        this.username = Preconditions.checkNotNull(newUsername);
     }
 
     public String getUsername() {
@@ -60,7 +64,7 @@ public class Users {
 
     // Setter
     public void setBirthdate(LocalDate newBirthdate) {
-        this.birthdate = newBirthdate;
+        this.birthdate = Preconditions.checkNotNull(newBirthdate);
     }
 
     public LocalDate getBirthdate() {
@@ -73,7 +77,7 @@ public class Users {
     }
 
     public List<Book> getBooks() {
-        return (List<Book>) Collections.unmodifiableList(books);
+        return books;
     }
     public void addBookToCollection(Book newBook) {
         if(!this.books.contains(newBook)){
@@ -88,13 +92,11 @@ public class Users {
         }
     }
 
-    public Users(long id, String name, String username, LocalDate birthdate,
-        List<Book> books) {
+    public User(long id, String name, String username, LocalDate birthdate) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.birthdate = birthdate;
-        this.books = books;
     }
 
     public Long getId() {
