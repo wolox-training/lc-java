@@ -1,10 +1,12 @@
 package com.wolox.servingwebcontent.models;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Book {
@@ -40,9 +42,12 @@ public class Book {
     @Column(nullable = false)
     private String isbn;
 
+    @ManyToMany(mappedBy = "books")
+    private List<Users> users;
+
     public Book(String newGenre, String newAuthor, String newImage, String newTitle,
         String newSubtitle, String newPublisher, Integer newYear, Integer newPages,
-        String newIsbn) {
+        String newIsbn, List<Users> users) {
         this.genre = newGenre;
         this.author = newAuthor;
         this.image = newImage;
@@ -52,6 +57,7 @@ public class Book {
         this.year = newYear;
         this.pages = newPages;
         this.isbn = newIsbn;
+        this.users = users;
     }
 
     // Setter
