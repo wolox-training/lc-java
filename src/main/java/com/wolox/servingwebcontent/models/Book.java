@@ -48,11 +48,11 @@ public class Book {
     private String isbn;
 
     @ManyToMany(mappedBy = "books")
-    private List<Users> users;
+    private List<User> users;
 
     public Book(String newGenre, String newAuthor, String newImage, String newTitle,
         String newSubtitle, String newPublisher, Integer newYear, Integer newPages,
-        String newIsbn, List<Users> users) {
+        String newIsbn, List<User> users) {
         this.genre = newGenre;
         this.author = newAuthor;
         this.image = newImage;

@@ -1,11 +1,11 @@
 package com.wolox.servingwebcontent.controllers;
 
 import com.wolox.servingwebcontent.exceptions.BookNotFoundException;
-import com.wolox.servingwebcontent.exceptions.UsersIdMismatchException;
-import com.wolox.servingwebcontent.exceptions.UsersNotFoundException;
+import com.wolox.servingwebcontent.exceptions.UserIdMismatchException;
+import com.wolox.servingwebcontent.exceptions.UserNotFoundException;
 import com.wolox.servingwebcontent.models.Book;
-import com.wolox.servingwebcontent.models.Users;
-import com.wolox.servingwebcontent.packages.UsersRepository;
+import com.wolox.servingwebcontent.models.User;
+import com.wolox.servingwebcontent.packages.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,20 +20,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/users")
-public class UsersController {
+public class UserController {
 
     @Autowired
-    private UsersRepository userRepository;
+    private UserRepository userRepository;
 
     @GetMapping("/{id}")
-    public Users findOne(@PathVariable Long id) {
+    public User findOne(@PathVariable Long id) {
         return userRepository.findById(id)
-            .orElseThrow(UsersNotFoundException::new);
+            .orElseThrow(UserNotFoundException::new);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Users create(@RequestBody Users user) {
+    public User create(@RequestBody User user) {
         return userRepository.save(user);
     }
 
@@ -45,9 +45,9 @@ public class UsersController {
     }
 
     @PutMapping("/{id}")
-    public Users updateBook(@RequestBody Users user, @PathVariable Long id) {
+    public User updateBook(@RequestBody User user, @PathVariable Long id) {
         if (user.getId() != id) {
-            throw new UsersIdMismatchException();
+            throw new UserIdMismatchException();
         }
         userRepository.findById(id)
             .orElseThrow(BookNotFoundException::new);
@@ -55,9 +55,9 @@ public class UsersController {
     }
 
     @PutMapping("/{id}/addBookToCollection")
-    public Users addBookToCollection(@RequestBody Users user, Book book, @PathVariable Long id) {
+    public User addBookToCollection(@RequestBody User user, Book book, @PathVariable Long id) {
         if (user.getId() != id) {
-            throw new UsersIdMismatchException();
+            throw new UserIdMismatchException();
         }
         userRepository.findById(id)
             .orElseThrow(BookNotFoundException::new);
@@ -66,9 +66,9 @@ public class UsersController {
     }
 
     @PutMapping("/{id}/removeBookFromCollection")
-    public Users removeBookFromCollection(@RequestBody Users user, Book book, @PathVariable Long id) {
+    public User removeBookFromCollection(@RequestBody User user, Book book, @PathVariable Long id) {
         if (user.getId() != id) {
-            throw new UsersIdMismatchException();
+            throw new UserIdMismatchException();
         }
         userRepository.findById(id)
             .orElseThrow(BookNotFoundException::new);

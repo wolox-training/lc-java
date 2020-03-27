@@ -3,6 +3,5 @@ package com.wolox.servingwebcontent.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Id mismatch exception")
-
-public class UsersIdMismatchException extends RuntimeException { }
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User not found")
+public class UserNotFoundException extends RuntimeException { }
