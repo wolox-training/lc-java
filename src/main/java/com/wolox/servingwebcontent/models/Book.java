@@ -52,7 +52,7 @@ public class Book {
 
     public Book(String newGenre, String newAuthor, String newImage, String newTitle,
         String newSubtitle, String newPublisher, Integer newYear, Integer newPages,
-        String newIsbn, List<User> users) {
+        String newIsbn) {
         this.genre = newGenre;
         this.author = newAuthor;
         this.image = newImage;
@@ -62,11 +62,8 @@ public class Book {
         this.year = newYear;
         this.pages = newPages;
         this.isbn = newIsbn;
-        this.users = users;
     }
 
-    public Book() {
-    }
 
     // Setter
     public void setGenre(String newGenre) {
@@ -100,7 +97,7 @@ public class Book {
         this.title = Preconditions.checkNotNull(newTitle);
     }
 
-    public String getTitle() {
+    public int getTitle() {
         return title;
     }
 
